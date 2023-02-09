@@ -1,5 +1,4 @@
 -- Function that performs division
-DROP FUNCTION SafeDiv;
 DELIMITER $$
 CREATE FUNCTION SafeDiv ( a INT, b INT)
 RETURNS FLOAT(16)
