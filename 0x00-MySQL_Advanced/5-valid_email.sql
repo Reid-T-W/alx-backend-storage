@@ -6,5 +6,5 @@ FOR EACH ROW
 SET NEW.email = NEW.email, NEW.valid_email = 
 CASE
 	WHEN OLD.email != NEW.email THEN 0
-	ELSE 1
+	ELSE NEW.valid_email = NEW.valid_email
 END
