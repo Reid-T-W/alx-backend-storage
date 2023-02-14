@@ -1,0 +1,2 @@
+// Insert a document into a collection
+db.process.argv[1].insertOne({ name: "Holberton school" });
