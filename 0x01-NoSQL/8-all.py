@@ -18,13 +18,13 @@ def list_all(mongo_collection):
     client = pymongo.MongoClient("mongodb://localhost:27017/")
 
     # Database name
-    db = client["my_db"]
+    # db = client["my_db"]
 
     # Collection name
-    col = db["school"]
+    # col = db["school"]
 
     # Retrieving and returning the documents
     # Checking if the collection has no documents
-    if col.count_documents == 0:
-        return []
-    return [doc for doc in col.find()]
+    # if mongo_collection.count_documents == 0:
+    #    return []
+    return [doc for doc in mongo_collection.find()]
