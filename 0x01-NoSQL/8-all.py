@@ -24,4 +24,7 @@ def list_all(mongo_collection):
     col = db["school"]
 
     # Retrieving and returning the documents
+    # Checking if the collection has no documents
+    if col.count_documents == 0:
+        return []
     return [doc for doc in col.find()]
