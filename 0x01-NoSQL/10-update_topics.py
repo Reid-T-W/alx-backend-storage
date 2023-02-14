@@ -17,4 +17,4 @@ def update_topics(mongo_collection, name, topics):
     """
     # Establishing connection to the database
     client = pymongo.MongoClient("mongodb://localhost:27017/")
-    mongo_collection.update_one({'name': name}, {'$set': {'topics': topics}})
+    mongo_collection.update_many({'name': name}, {'$set': {'topics': topics}})
