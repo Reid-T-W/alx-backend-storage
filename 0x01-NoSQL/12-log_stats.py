@@ -18,10 +18,15 @@ if __name__ == "__main__":
 
     print(f"{col.count_documents({})} logs")
     print("Methods:")
-    print(f"    method GET: {col.count_documents({'method': 'GET'})}")
-    print(f"    method POST: {col.count_documents({'method': 'POST'})}")
-    print(f"    method PUT: {col.count_documents({'method': 'PUT'})}")
-    print(f"    method PATCH: {col.count_documents({'method': 'PATCH'})}")
-    print(f"    method DELETE: {col.count_documents({'method': 'DELETE'})}")
+    print(f"\tmethod GET: {col.count_documents({'method': 'GET'})}"
+          .expandtabs(4))
+    print(f"\tmethod POST: {col.count_documents({'method': 'POST'})}"
+          .expandtabs(4))
+    print(f"\tmethod PUT: {col.count_documents({'method': 'PUT'})}"
+          .expandtabs(4))
+    print(f"\tmethod PATCH: {col.count_documents({'method': 'PATCH'})}"
+          .expandtabs(4))
+    print(f"\tmethod DELETE: {col.count_documents({'method': 'DELETE'})}"
+          .expandtabs(4))
     print("{} status check".
           format(col.count_documents({'method': 'GET', 'path': '/status'})))
