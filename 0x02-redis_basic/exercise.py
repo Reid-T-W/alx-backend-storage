@@ -18,15 +18,15 @@ class Cache():
         self._redis.set(key, data)
         return key
 
-    def get_str(self, key):
+    def get_str(self, key: str) -> str:
         """Convert byte to string"""
         return(self._redis.get(key).decode("utf-8"))
 
-    def get_int(self, key):
+    def get_int(self, key: str) -> int:
         """Convert byte to int"""
         return(int(self._redis.get(key), 10))
 
-    def get(self, key: str, fn: Callable = None):
+    def get(self, key: str, fn: Callable = None) -> Union[str, bytes, int]:
         """
         Modified get inorder to convert the values
         to their original types
