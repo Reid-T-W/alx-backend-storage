@@ -26,7 +26,7 @@ class Cache():
         """Convert byte to int"""
         return(int(self._redis.get(key), 10))
 
-    def get(self, key: str, fn: Callable = None) -> Union[str, bytes, int]:
+    def get(self, key: str, fn: Callable = None) -> Union[str, bytes, int, None]:
         """
         Modified get inorder to convert the values
         to their original types
