@@ -35,6 +35,6 @@ if __name__ == "__main__":
         {'$limit': 10}
     ])
 
-    print("IPs")
+    print("IPs:")
     for ip in top10Ips:
         print(f"\t{ip.get('_id')}: {ip.get('ip_count')}")
