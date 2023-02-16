@@ -13,7 +13,6 @@ def get_page(url: str) -> str:
     cache = redis.Redis()
     key = f"count:{url}"
     result = requests.get(url).text
-    # cache.setex(key, 10, result)
-    cache.incr(key)
-    print(cache.get(key))
+    cache.setex(key, 10, result)
+    # cache.incr(key)
     return result
