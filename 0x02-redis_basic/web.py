@@ -16,8 +16,8 @@ def track_url_access_count(method):
         cache = redis.Redis()
         key = f"count:{args[0]}"
         result = method(*args, **kwds)
-        cache.expire(key, 10)
-        cache.set(key, result)
+        # cache.expire(key, 10)
+        cache.setex(key, 10, result)
         # cache.incr(key)
         print(cache.get(key))
         return result
