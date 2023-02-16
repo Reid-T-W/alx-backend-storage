@@ -31,5 +31,3 @@ def get_page(url: str) -> str:
     """
     html = requests.get(url).text
     return html
-
-get_page("https://google.com")
