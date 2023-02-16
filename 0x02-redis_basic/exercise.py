@@ -6,6 +6,19 @@ from typing import Union, Callable
 from functools import wraps
 
 
+def replay(method: Callable) -> None:
+    """Displays the history of calls of a particular function"""
+    redis_inst = redis.Redis()
+    print("Cache.store was called {} times:".
+          format(int(redis_inst.get(method.__qualname__), 10)))
+    input = redis_inst.lrange(method.__qualname__+":inputs", 0, -1)
+    output = redis_inst.lrange(method.__qualname__+":outputs", 0, -1)
+    zipped_list = list(zip(input, output))
+    for item in zipped_list:
+        print("Cache.store(*{}) -> {}".
+              format(item[0].decode('utf-8'), item[1].decode('utf-8')))
+
+
 def call_history(method: Callable) -> Callable:
     """Makes track of the calles made by a function """
     inputs = []
