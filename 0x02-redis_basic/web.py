@@ -15,10 +15,12 @@ def track_url_access_count(method):
     def wrapper(*args, **kwds):
         cache = redis.Redis()
         key = f"count:{args[0]}"
+        result = method(*args, **kwds)
         cache.expire(key, 10)
-        cache.incr(key)
+        cache.set(key, result)
+        # cache.incr(key)
         print(cache.get(key))
-        return method(*args, **kwds)
+        return result
     return wrapper
 
 
@@ -29,3 +31,5 @@ def get_page(url: str) -> str:
     """
     html = requests.get(url).text
     return html
+
+get_page("https://google.com")
