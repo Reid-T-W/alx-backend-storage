@@ -14,5 +14,5 @@ def get_page(url: str) -> str:
     key = f"count:{url}"
     result = requests.get(url).text
     cache.incr(key)
-    cache.setex("result", 10, result)
+    cache.setex(url, 10, result)
     return result
