@@ -39,6 +39,6 @@ class Cache():
             if fn == int:
                 return(self.get_int(key))
             elif fn is None:
-                return(key)
+                return(self._redis.get(key))
             else:
                 return(self.get_str(key))
