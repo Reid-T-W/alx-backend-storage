@@ -7,8 +7,13 @@ from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
+    """
+    Decorator function that tracks the number of
+    times the store method of cache class is called
+    """
     @wraps(method)
     def wrapper(*args, **kwds):
+        """Wrapper function"""
         args[0]._redis.incr(method.__qualname__)
         return method(*args, **kwds)
     return wrapper
