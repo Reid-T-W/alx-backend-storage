@@ -3,6 +3,15 @@
 import redis
 import uuid
 from typing import Union, Callable
+from functools import wraps
+
+
+def count_calls(method: Callable) -> Callable:
+    @wraps(method)
+    def wrapper(*args, **kwds):
+        args[0]._redis.incr(method.__qualname__)
+        return method(*args, **kwds)
+    return wrapper
 
 
 class Cache():
@@ -12,6 +21,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """ Method that stores a key and value to redis """
         key = str(uuid.uuid4())
@@ -26,7 +36,8 @@ class Cache():
         """Convert byte to int"""
         return(int(self._redis.get(key), 10))
 
-    def get(self, key: str, fn: Callable = None) -> Union[str, bytes, int, float, None]:
+    def get(self, key: str, fn: Callable = None) -> \
+            Union[str, bytes, int, float, None]:
         """
         Modified get inorder to convert the values
         to their original types
