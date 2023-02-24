@@ -41,13 +41,11 @@ def count_calls(method: Callable) -> Callable:
     times the store method of cache class is called
     """
     @wraps(method)
-    def wrapper(*args, **kwds):
+    def wrapper(self, *args, **kwds):
         """Wrapper function"""
-        self = args[0]
-        self.__qualname__ = method.__qualname__
-        key = self.__qualname__
+        key = method.__qualname__
         self._redis.incr(key)
-        return method(*args, **kwds)
+        return method(self, *args, **kwds)
     return wrapper
 
 
